@@ -1,64 +1,97 @@
-import java.util.Scanner;
-public class Aluno_Main {
-    
-    public static void main(String[] args) {
-    Scanner leitor = new Scanner(System.in);     
-    System.out.println("Digite o nome do aluno: ");
-   String nome = leitor.nextLine();
-   
-   System.out.print("Diga a matricula: ");
-   String matricula = leitor.nextLine();
-      
-   System.out.print("Digite o nome do curso: ");
-   String curso = leitor.nextLine();
-   String[] disciplinas = new String[3];
-   double[] notas1 = new double[4];
-   double[] notas2 = new double[4];
-   double[] notas3 = new double[4];
-   
-   for(int i=0; i<3; i++){
-       System.out.println("DIgite a disciplina " + i+1+": ");
-       disciplinas[i] = leitor.nextLine();
-   }
-   
-   for(int i=0; i<notas1.length; i++){
-       System.out.println("DIgite a nota " + i+1+" da disciplina " + disciplinas[0]);
-       notas1[i] = leitor.nextDouble();
-   }
-   
-   for(int i=0; i<notas2.length; i++){
-       System.out.println("DIgite a nota " + i+1+"da disciplina " + disciplinas[1]);
-       notas2[i] = leitor.nextDouble();
-   }
-   
-   for(int i=0; i<notas3.length; i++){
-       System.out.println("DIgite a disciplina " + i+1+"da disciplina " + disciplinas[2]);
-       notas3[i] = leitor.nextDouble();
-   }
-   
-        Aluno a1 = new Aluno();
-        a1.setNome_Aluno(nome);
-        a1.setNum_Matricula(matricula);
-        a1.setNome_Curso(curso);
-        a1.setVetor_Disciplinas(disciplinas);
-        a1.setVetor_Notas1(notas1);
-        a1.setVetor_Notas2(notas2);
-        a1.setVetor_Notas3(notas3);
+public class Aluno {
 
-        
-        System.out.println("Nome do aluno: " + a1.getNome_Aluno());
-        System.out.println("Nome do curso: " + a1.getNome_Curso());
-        System.out.println("Numero da matricula: " + a1.getNum_Matricula());
-        
-        for(int i=0; i<3; i++){
-        System.out.println("Disciplina " + i+1+": " + a1.getVetor_Disciplinas()[i]);
+    private String nome_Aluno;
+    private String num_Matricula;
+    private String nome_Curso;
+    private String vetor_Disciplinas[];
+    private double vetor_Notas1[];
+    private double vetor_Notas2[];
+    private double vetor_Notas3[];
+
+    public Aluno() {
+        this.nome_Aluno = "";
+        this.num_Matricula = "";
+        this.nome_Curso = "";
+        this.vetor_Disciplinas = new String[2];
+        this.vetor_Notas1 = new double[3];
+        this.vetor_Notas2 = new double[3];
+        this.vetor_Notas3 = new double[3];
+    }
+
+    public void setNome_Aluno(String nome_Aluno) {
+        this.nome_Aluno = nome_Aluno;
+    }
+    public void setNum_Matricula(String num_Matricula) {
+        this.num_Matricula = num_Matricula;
+    }
+    public void setNome_Curso(String nome_Curso) {
+        this.nome_Curso = nome_Curso;
+    }
+    public void setVetor_Disciplinas(String[] vetor_Disciplinas) {
+        this.vetor_Disciplinas = vetor_Disciplinas;
+    }
+    public void setVetor_Notas1(double[] vetor_Notas1) {
+        this.vetor_Notas1 = vetor_Notas1;
+    }
+    public void setVetor_Notas2(double[] vetor_Notas2) {
+        this.vetor_Notas2 = vetor_Notas2;
+    }
+    public void setVetor_Notas3(double[] vetor_Notas3) {
+        this.vetor_Notas3 = vetor_Notas3;
+    }
+    public String getNome_Aluno() {
+        return nome_Aluno;
+    }
+    public String getNum_Matricula() {
+        return num_Matricula;
+    }
+    public String getNome_Curso() {
+        return nome_Curso;
+    }
+    public String[] getVetor_Disciplinas() {
+        return vetor_Disciplinas;
+    }
+    public double[] getVetor_Notas1() {
+        return vetor_Notas1;
+    }
+    public double[] getVetor_Notas2() {
+        return vetor_Notas2;
+    }
+    public double[] getVetor_Notas3() {
+        return vetor_Notas3;
+    }
+
+    public double calcularMedia(double disciplina) {
+        double soma = 0;
+        double media = 0;
+
+        if (disciplina == 1) {
+            for (int i = 0; i < vetor_Notas1.length; i++) {
+                soma = soma + vetor_Notas1[i];
+            }
+            media = soma / vetor_Notas1.length;
         }
-        
-        for(int i=0; i<4; i++){
-        System.out.println("Nota " + i+1+"da disciplina " + a1.getVetor_Disciplinas()[0] +": "+ a1.getVetor_Notas1()[i]);
+
+        if (disciplina == 2) {
+            for (int i = 0; i < vetor_Notas2.length; i++) {
+                soma = soma + vetor_Notas2[i];
+            }
+            media = soma / vetor_Notas2.length;
         }
-        
-        System.out.println("Média da "+ disciplina +"° disciplina: "+ a1.calcularMedia(disciplina));
-        System.out.println("Aluno foi aprovado:" + a1.aluno_Aprovado(disciplina));
+
+        if (disciplina == 3) {
+            for (int i = 0; i < vetor_Notas3.length; i++) {
+                soma = soma + vetor_Notas3[i];
+            }
+            media = soma / vetor_Notas3.length;
+        }
+        return media;
+    }
+    public boolean aluno_Aprovado (int disciplina) {
+        if(calcularMedia(disciplina)>=7){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
